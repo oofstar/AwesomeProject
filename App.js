@@ -1,23 +1,37 @@
+'use strict';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, NavigatorIOS, } from 'react-native';
 
-export default class App extends React.Component {
+class SearchPage extends React.Component {
+  render() {
+    return <Text style={styles.description}>Search for houses to buy!</Text>;
+  }
+}
+
+export default class PropertyFinder extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <NavigatorIOS
+        style={styles.container}
+        initialRoute={{
+          title: 'Property Finder',
+          component: SearchPage,
+        }}/>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  description: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#656565',
+    marginTop: 65,
+  },
+
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
+
+AppRegistry.registerComponent('PropertyFinder', () => PropertyFinder);
