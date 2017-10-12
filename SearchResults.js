@@ -58,6 +58,7 @@ export default class SearchResults extends Component {
     this.props.navigator.push({
       title: 'Listing',
       component: Listing,
+      passProps: {listing: this.props.listings[index]}
     });
   };
 
