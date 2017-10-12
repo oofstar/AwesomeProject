@@ -1,12 +1,7 @@
 'use strict';
 import React from 'react';
 import { AppRegistry, StyleSheet, Text, View, NavigatorIOS, } from 'react-native';
-
-class SearchPage extends React.Component {
-  render() {
-    return <Text style={styles.description}>Search for houses to buy!</Text>;
-  }
-}
+import SearchPage from './SearchPage';
 
 export default class PropertyFinder extends React.Component {
   render() {
