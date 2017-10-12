@@ -9,6 +9,8 @@ import {
   FlatList,
   Text,
 } from 'react-native';
+import Listing from './Listing';
+import PropertyFinder from './App';
 
 class ListItem extends React.PureComponent {
   _onPress = () => {
@@ -53,6 +55,10 @@ export default class SearchResults extends Component {
 
   _onPressItem = (index) => {
     console.log("Pressed row: " +index);
+    this.props.navigator.push({
+      title: 'Listing',
+      component: Listing,
+    });
   };
 
   render() {
