@@ -35,6 +35,7 @@ export default class SearchPage extends Component {
     this.state = {
       searchString: 'london',
       isLoading: false,
+      message: '',
     };
   }
 
@@ -45,6 +46,24 @@ export default class SearchPage extends Component {
   _executeQuery = (query) => {
     console.log(query);
     this.setState({ isLoading: true });
+    fetch(query)
+      .then(response => response.json())
+      .then(json => this._handleResponse(json.response))
+      .catch(error =>
+        this.setState({
+          isLoading: false,
+          message: 'Something bad happened ' + error
+        })
+      )
+  };
+
+  _handleResponse = (response) => {
+    this.setState({ isLoading: false , message: '' });
+    if (response.application_response_code.substr(0, 1) == 1) {
+      console.log('Properties found: ' + response.listings.length);
+    } else {
+      this.setState({ message: 'Location not recognized; please try again.'});
+    }
   };
 
   _onSearchPressed = () => {
@@ -79,6 +98,7 @@ export default class SearchPage extends Component {
         </View>
         <Image source={require('./Resources/house.png')} style={styles.image}/>
         {spinner}
+        <Text style={styles.description}>{this.state.message}</Text>
       </View>
     );
   }
